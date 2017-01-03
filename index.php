@@ -114,8 +114,8 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = 'application';
-
+	$application_folder = 'application/frontend';
+	//$application_folder = 'application/jhotels'
 /*
  *---------------------------------------------------------------
  * VIEW DIRECTORY NAME
