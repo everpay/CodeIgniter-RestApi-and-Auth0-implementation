@@ -18,26 +18,53 @@ $confirm_new_password = array(
 	'size' 	=> 30,
 );
 ?>
-<?php echo form_open($this->uri->uri_string()); ?>
-<table>
-	<tr>
-		<td><?php echo form_label('Old Password', $old_password['id']); ?></td>
-		<td><?php echo form_password($old_password); ?></td>
-		<td style="color: red;"><?php echo form_error($old_password['name']); ?><?php echo isset($errors[$old_password['name']])?$errors[$old_password['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('New Password', $new_password['id']); ?></td>
-		<td><?php echo form_password($new_password); ?></td>
-		<td style="color: red;"><?php echo form_error($new_password['name']); ?><?php echo isset($errors[$new_password['name']])?$errors[$new_password['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('Confirm New Password', $confirm_new_password['id']); ?></td>
-		<td><?php echo form_password($confirm_new_password); ?></td>
-		<td style="color: red;"><?php echo form_error($confirm_new_password['name']); ?><?php echo isset($errors[$confirm_new_password['name']])?$errors[$confirm_new_password['name']]:''; ?></td>
-	</tr>
-</table>
-<?php echo form_submit('change', 'Change Password'); ?>
-<?php echo form_close(); ?>
+<div id="wrapper">
+	<div class="slim container">
+		<div class="row">
+			<div class="box01">
+				<div class="login-window login-top">
+					<div id="header1">
+						<h1>Change Password</h1>
+					</div>
+					
+					<div class="row left10">
+
+						<?php echo form_open($this->uri->uri_string()); ?>
+							<div>
+								<?php echo form_label('Old Password', $old_password['id']); ?>
+								<?php echo form_password($old_password); ?>
+								<span><?php echo form_error($old_password['name']); ?><?php echo isset($errors[$old_password['name']])?$errors[$old_password['name']]:''; ?></span>
+							</div>
+							<div>
+								<?php echo form_label('New Password', $new_password['id']); ?>
+								<?php echo form_password($new_password); ?>
+								<span><?php echo form_error($new_password['name']); ?><?php echo isset($errors[$new_password['name']])?$errors[$new_password['name']]:''; ?></span>
+							</div>
+							<div>
+								<?php echo form_label('Confirm New Password', $confirm_new_password['id']); ?>
+								<?php echo form_password($confirm_new_password); ?>
+								<?php echo form_error($confirm_new_password['name']); ?><?php echo isset($errors[$confirm_new_password['name']])?$errors[$confirm_new_password['name']]:''; ?>
+								<span></span>
+							</div>
+							<div style="clear:Both;"><br /></div>
+							<div>
+								<?php 
+									$attributes1=array('class'=>'btn btn-success');
+									echo form_submit('change', 'Change Password' , $attributes1); ?>
+								<?php echo form_close(); ?>
+							</div>	
+							
+						</form>
+					</div>
+					
+					
+				</div>
+	    
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <?php
   $this->load->view('footer');

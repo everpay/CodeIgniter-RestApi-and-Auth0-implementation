@@ -62,3 +62,5 @@ $route['translate_uri_dashes'] = FALSE;
 */
 $route['api/hotel/users/(:num)'] = 'api/hotel/users/id/$1'; // Example 4
 $route['api/hotel/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/hotel/users/id/$1/format/$3$4'; // Example 8
+
+

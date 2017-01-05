@@ -124,15 +124,20 @@ $error_message = "<small class=\"error\">".form_error($captcha['name'])."</small
 								<span>Remember me.</span>
 								
 							</div>
-							
+							<div>
 							<?php echo $captcha_content; ?>
 							<a href="<?php echo site_url(); ?>/auth/forgot_password/" class="forgot">Forgot your password?</a>
 							<!--<div class=logbtn>
 								
 							</div>-->
-							
-							<button type="submit" id="loginBtn" class="submit">Login</button>
-								
+							</div>
+							<div>
+							<?php 
+									$attributes1=array('class'=>'btn btn-primary');
+									echo form_submit('submit', 'Login' , $attributes1); ?>
+								<?php echo form_close(); ?>
+							<!--<button type="submit" id="loginBtn" class="submit">Login</button>-->
+							</div>	
 							
 						</form>
 					</div>

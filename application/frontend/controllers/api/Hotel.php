@@ -29,6 +29,93 @@ class Hotel extends REST_Controller {
         $this->methods['users_get']['limit'] = 10000; // 500 requests per hour per user/key
         $this->methods['users_post']['limit'] = 1000; // 100 requests per hour per user/key
         $this->methods['users_delete']['limit'] = 500; // 50 requests per hour per user/key
+        $this->methods['hotels_get']['limit'] = 10000;
+    }
+
+    public function hotels_get()
+    {
+        // Users from a data store e.g. database
+        $hotels = [
+            ['id' => 1, 'name' => 'John', 'email' => 'john@example.com', 'fact' => 'Loves coding'],
+            ['id' => 2, 'name' => 'jim', 'email' => 'jim@example.com', 'fact' => 'Developed on CodeIgniter'],
+            ['id' => 3, 'name' => 'jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
+        ];
+       
+        $name = $this->get('name');
+        $value = $this->uri->segment('4');
+        $place = (isset($value))? $value :'';
+        $value = $this->uri->segment('5');
+        $checkin = (isset($value))? $value :'';
+        $value = $this->uri->segment('6');
+        $checkout = (isset($value))? $value :'';
+        $value = $this->uri->segment('7');
+        $room = (isset($room))? $value :'';
+        
+        
+        // If the id parameter doesn't exist return all the users
+
+        if ($name === NULL)
+        {
+            
+            // Check if the users data store contains users (in case the database result returns NULL)
+            if ($hotels)
+            {
+                // Set the response and exit
+                $this->response($hotels, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            }
+            else
+            {
+                // Set the response and exit
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'No users were found'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+            }
+        }
+
+        // Find and return a single record for a particular user.
+
+        
+        // Validate the id.
+        if ($name <= "")
+        {
+            
+            // Invalid id, set the response and exit.
+            $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+        }
+
+        // Get the user from the array, using the id as key for retrieval.
+        // Usually a model is to be used for this.
+
+        $user = NULL;
+
+        if (!empty($hotels))
+        {
+            
+            if (!empty($hotels))
+            {
+                foreach ($hotels as $key => $value)
+                {
+                    if (strcasecmp( $value['name'] , $name) == 0 )
+                    {       
+                    $user = $value;
+                    }
+                }
+            }
+             
+        }
+
+        if (!empty($user))
+        {
+            $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'User could not be found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
     }
 
     public function users_get()
@@ -39,7 +126,7 @@ class Hotel extends REST_Controller {
             ['id' => 2, 'name' => 'Jim', 'email' => 'jim@example.com', 'fact' => 'Developed on CodeIgniter'],
             ['id' => 3, 'name' => 'Jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
         ];
-
+       
         $id = $this->get('id');
 
         // If the id parameter doesn't exist return all the users

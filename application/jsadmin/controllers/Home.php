@@ -8,12 +8,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
         //$this->load->helper(array('url', 'html'));
-        $this->load->library('session');
-		$this->load->helper('security');
-      	$this->load->library('tank_auth');
-		
-		$this->lang->load('tank_auth');
-		
+        $this->lang->load('tank_auth');
 		$this->_init();
 	}
 

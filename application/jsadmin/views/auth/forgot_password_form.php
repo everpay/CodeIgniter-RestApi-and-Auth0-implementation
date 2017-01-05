@@ -47,11 +47,7 @@ $error_message .= "<small class=\"error\">".str_replace("Login", "Email", $error
 
 				</div>
 
-		    <div style=margin-top:10px;>
-		        &copy; <?php echo date("Y");?> by Young Jun "John" Kim
 		    </div>
-
-			</div>
 		</div>
 	</div>
 </div>

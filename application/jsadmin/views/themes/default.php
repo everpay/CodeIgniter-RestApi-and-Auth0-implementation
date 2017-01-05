@@ -28,6 +28,7 @@
 	} echo "\n\t";
 ?>
     <link href="<?php echo base_url(); ?>assets/themes/default/css/style.css" rel="stylesheet">
+    
     <!-- Le styles -->
 
     <!--[if lt IE 9]>
@@ -50,12 +51,12 @@
                 	<a href="<?php echo site_url(); ?>">&nbsp;</a>
                 </div>
                 <div class="secondry-nav">
-                	<ul>
+                	<!--<ul>
                     	<li><a href="<?php echo site_url(); ?>">Travel</a></li>
                         <li><a href="<?php echo site_url(); ?>">Destinations</a></li>
                         <li><a href="<?php echo site_url(); ?>">Hotels</a></li>
                         <li><a href="<?php echo site_url(); ?>">Foods</a></li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-8">
@@ -65,7 +66,21 @@
                         <li><a href="<?php echo site_url(); ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="<?php echo site_url(); ?>">PKR</a></li>
                         <li>
-                        	<a href="<?php echo base_url(); ?>auth/login">LOGIN</a>
+                           <?php if(!empty($user_id)){?>
+                           <div class="loggedin-area clearfix">
+                        		<img class="pull-left profile-small-img" alt="" src="<?php echo base_url(); ?>assets/themes/default/images/profile-img.jpg" >
+                        		<a href="#" class="pull-right">Zeeshan R. <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Bookings</a></li>
+                                    <li><a href="#">Reviews</a></li>
+                                    <li><a href="<?php echo site_url(); ?>/Profile/index">Profile</a></li>
+                                    <li><a href="<?php echo site_url(); ?>/auth/logout">Sign out</a></li>
+                                </ul>
+                            </div>
+
+                           <?php } else{?> 
+                        	<a href="<?php echo site_url(); ?>/auth/login">LOGIN</a>
+                           <?php }?> 
                         </li>
                         <li class="search-icon"><a href="<?php echo base_url(); ?>"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                     </ul>
@@ -183,5 +198,7 @@ foreach($js as $file){
 			?><script src="<?php echo $file; ?>"></script><?php
 	} echo "\n\t";
 ?>
+
+
 </body>
 </html>

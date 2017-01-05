@@ -3,16 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Profile extends CI_Controller {
 
-	///public function index()
-	//{
-	//	$this->load->view('Profile/index');
-	//}
 	public function __construct()
     {
         parent::__construct();
         $this->load->database();
         $this->load->model('user_model');
-		$this->_init();
+       	$this->_init();
     }
     
     private function _init()
@@ -33,7 +29,14 @@ class Profile extends CI_Controller {
 
     function index()
     {
-        $this->load->view ('Profile/index');
+        if (!$this->tank_auth->is_logged_in()) {
+			redirect('/auth/login/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+            $this->load->view('Profile/index', $data);
+        }
+        
        
     }
 

@@ -14,12 +14,10 @@
                             </div>
                         </div>
                     	<ul>
-                        	<li><a href="#">My Bookings</a></li>
-                            <li class="active"><a href="<?php echo site_url(); ?>">Profile</a></li>
-                            <li><a href="<?php echo site_url(); ?>">Saved Payment Method</a></li>
-                            <li><a href="<?php echo site_url(); ?>">Refer a Friends</a></li>
-                            <li><a href="<?php echo site_url(); ?>">Change Password</a></li>
-                            <li><a href="<?php echo site_url(); ?>">Sign Out</a></li>
+                        	<li class="active"><a href="<?php echo site_url(); ?>">Profile</a></li>
+                            <li><a href="" data-toggle="modal" data-target="#myModal" onclick="get_modal();" >Add Hotel</a></li>
+                            <li><a href="<?php echo site_url(); ?>/auth/change_password">Change Password</a></li>
+                            <li><a href="<?php echo site_url(); ?>/auth/logout">Sign Out</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -27,6 +25,8 @@
                 	<div class="personaldetail" id="profile">
                     	<h3>Profile details</h3>
                         <p>Completing your profile details will make your future booking faster and easier.</p>
+                        
+                        <div id="modal_target"></div>
                         <form action="" method="post">
                         	<div class="head">
                             	<h4>Basic Information</h4>
@@ -465,7 +465,26 @@
         </div>
     </div>
 </div>
+<div id="myModal" class="modal fade mymodal1" role="dialog">
+</div>
 <!--main end -->
 <?php
   $this->load->view('footer');
 ?>
+<script type="text/javascript"> 
+    function get_modal(){
+        
+        jQuery.ajax({
+            type    : 'POST', 
+            url     : '<?php echo site_url(); ?>/hotel/add_hotel',
+            cache   : false,
+            success : function(data){ 
+               if(data){
+                   jQuery("#myModal").modal('show');
+                   jQuery(".mymodal1").html(data);
+                
+               }
+            }
+        });
+    }
+</script>

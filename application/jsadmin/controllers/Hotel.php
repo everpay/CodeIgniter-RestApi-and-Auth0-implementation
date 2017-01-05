@@ -1,24 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Hotel extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->load->helper('url');
-        //$this->load->helper(array('url', 'html'));
-        $this->load->library('session');
-		$this->load->helper('security');
-      	$this->load->library('tank_auth');
-		$this->lang->load('tank_auth');
-		
-		$this->_init();
 	}
 
     private function _init()
 	{
+		
 		$this->output->set_template('default');
         // CSS
         $this->load->css('assets/themes/default/css/jquery-ui.css');
@@ -40,19 +32,20 @@ class Home extends CI_Controller {
 
     function index()
     {
-        // if (!$this->tank_auth->is_logged_in()) {
-		// 	redirect('/auth/login/');
-		// } else {
-		// 	$data['user_id']	= $this->tank_auth->get_user_id();
-		// 	$data['username']	= $this->tank_auth->get_username();
-		// 	$this->load->view('Home', $data);
-		// }
-		// Get login for counting attempts to login
-		
-		$this->load->view('Home');
+      	//$this->load->view('hotel/index');
     }
-	public function login_form(){
-		$this->load->view('auth/login_form');
+
+    public function add_hotel()
+    {
+		$this->load->view('hotel/add_hotel');
+    }
+
+	public function check_hotel_name()
+    {	
+		// if(isset($_POST)){
+		// 	echo"<pre>";
+		// 	print_r($_POST);
+		// 	exit;
+		// }
 	}
-   
 }
