@@ -30,7 +30,7 @@
         </ul>
         <div class="homecontent-section">
         	<div id="hotels" class="home-tabs" style="display:block;">
-            	<form method="get" action="">
+            	<form name ="hotel_search" action="<?php echo base_url(); ?>Hotel/get_hotel_list" method="post">
                 	<div class="row">
                     	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                         	<!--<input type="text" placeholder="City, neighborhood, property, landmark…" name="where-go">-->
@@ -304,19 +304,69 @@
                         	<label>Check-out:</label>
                         	<input type="text" id="datepicker-2" placeholder="Check-out" name="Check-out">
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        	<label>Travelers:</label>
-                            <select name="travelers">
-                            	<option>Adults</option>
-                                <option selected>2+1 with Bedroom + 2 Child</option>
-                                <option>1+1 with Bedroom + 1 Child</option>
-                                <option>2+1 with Bedroom + Full</option>
-                                <option>Full Services 15 Days</option>
+                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        	<label>Rooms:</label>
+                            <select name="no_rooms" id="no_rooms">
+                                <option value="1" selected="selected">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        	<label>Adults:</label>
+                            <select name="no_adults" id="no_adults">
+                                <option value="1" selected="selected">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6">
+                        	<label>Childrens:</label>
+                            <select name="no_children" id="no_children">
+                                <option value="1" selected="selected">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 col-lg-offset-0 col-md-offset-0 col-sm-offset-4 col-xs-offset-3">
                         	<label>&nbsp;</label>
-                        	<input class="button" type="button" value="search" >
+                        	<input class="button" type="submit" value="search" >
                         </div>
                     </div>
                     
@@ -513,11 +563,19 @@
 <!-- Home Slider Ends -->
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script>
-jQuery.noConflict();
+    jQuery.noConflict();
 </script>
 <script src="<?php echo base_url(); ?>assets/themes/default/js/jquery.typeahead.min.js"></script>
 <script>
 var data = {
+            continents: [
+                 "Africa",
+                 "Antarctica",
+                 "Asia",
+                 "Europe",
+                 "North America",
+                 "Oceania",
+                 "South America"],
             countries: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
                 "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
                 "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
@@ -581,6 +639,9 @@ jQuery.typeahead({
     order: "asc",
     template: "{{display}} <small style='color:#999;'>{{group}}</small>",
     source: {
+        continent: {
+           data: data.continents
+        },
         country: {
            data: data.countries
         },

@@ -88,7 +88,9 @@ jQuery(function(){
 jQuery(function(){
 	jQuery('#datepicker,#datepicker-2,#datepicker-3,#datepicker-4,#datepicker-5,#datepicker-6,#datepicker-7,#datepicker-8,#datepicker-9').datepicker({
 		numberOfMonths: 2,
-		showButtonPanel: true
+		showButtonPanel: true,
+		dateFormat: 'dd-mm-yy'
+		
 	});
 });
 

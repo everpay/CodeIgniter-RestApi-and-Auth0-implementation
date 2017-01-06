@@ -11,10 +11,16 @@
       <div class="modal-body">
           <div class="hotel_details_form">
               <div class="row">
-                  <div class="col-sm-6">
-                      <label>Continent:</label>
-                      <input type="text" name="name" >
-                  </div>
+              <div class="col-sm-6">
+                  <div class="typeahead__container">
+                        <label>Continent:</label>
+                        <div class="typeahead__field">
+                        <span class="typeahead__query">
+                            <input class="js-typeahead-continents_v2" name="continent_v2[query]" type="search" placeholder="Search" autocomplete="off">
+                        </span>
+                        </div>
+                    </div>
+                    </div>
                   <div class="col-sm-6">
                     <div class="typeahead__container">
                         
@@ -48,14 +54,15 @@
               </div>
               <div class="row">
                   <div class="col-sm-6">
-                    <label>Description:</label>
+                    <label>Total Rooms:</label>
                     <input type="email" name="email" >
                   </div>
                   <div class="col-sm-6">
-                      <label>Total Rooms #:</label>
+                      <label>Available Rooms #:</label>
                       <input type="text" name="name" >
                   </div>
               </div>
+              
               <div class="row">
                   <div class="col-sm-6">
                     <label>Website Link:</label>
@@ -65,6 +72,13 @@
                     <label>Email Address:</label>
                     <input type="email" name="email" >
                   </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-12">
+                    <label>Description:</label>
+                    <textarea name="description" placeholder="e.g our hotel is best in providing good quality services."></textarea>
+                  </div>
+                  
               </div>
               
           </div>
@@ -82,6 +96,15 @@
 
 <script>
 var data = {
+            continents: [
+                 "Africa",
+                 "Antarctica",
+                 "Asia",
+                 "Europe",
+                 "North America",
+                 "Oceania",
+                 "South America"],
+
             countries: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
                 "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
                 "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
@@ -225,6 +248,48 @@ jQuery.typeahead({
     }
 });
 
-
+jQuery.typeahead({
+    input: '.js-typeahead-continents_v2',
+    minLength: 1,
+    maxItem: 20,
+    order: "asc",
+    template: "{{display}} <small style='color:#999;'>{{group}}</small>",
+    source: {
+        continent: {
+           data: data.continents
+        }
+    },
+    callback: {
+        onNavigateAfter: function (node, lis, a, item, query, event) {
+            if (~[38,40].indexOf(event.keyCode)) {
+                var resultList = node.closest("form").find("ul.typeahead__list"),
+                    activeLi = lis.filter("li.active"),
+                    offsetTop = activeLi[0] && activeLi[0].offsetTop - (resultList.height() / 2) || 0;
+ 
+                resultList.scrollTop(offsetTop);
+            }
+ 
+        },
+        onResult: function (node, query, result, resultCount) {
+            if (query === "") return;
+ 
+            var text = "";
+            if (result.length > 0 && result.length < resultCount) {
+                text = "Showing <strong>" + result.length + "</strong> of <strong>" + resultCount + '</strong> elements matching "' + query + '"';
+            } else if (result.length > 0) {
+                text = 'Showing <strong>' + result.length + '</strong> elements matching "' + query + '"';
+            } else {
+                text = 'No results matching "' + query + '"';
+            }
+            jQuery('#result-container').html(text);
+ 
+        },
+        onMouseLeave: function (node, a, item, event) {
+ 
+           jQuery(a).find('.flag-chart').remove();
+ 
+        }
+    }
+});
 
 </script>

@@ -23,7 +23,7 @@ class Hotel extends REST_Controller {
     {
         // Construct the parent class
         parent::__construct();
-
+        $this->load->model('get_hotels');
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
         $this->methods['users_get']['limit'] = 10000; // 500 requests per hour per user/key
@@ -41,7 +41,7 @@ class Hotel extends REST_Controller {
             ['id' => 3, 'name' => 'jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
         ];
        
-        $name = $this->get('name');
+       
         $value = $this->uri->segment('4');
         $place = (isset($value))? $value :'';
         $value = $this->uri->segment('5');
@@ -49,9 +49,15 @@ class Hotel extends REST_Controller {
         $value = $this->uri->segment('6');
         $checkout = (isset($value))? $value :'';
         $value = $this->uri->segment('7');
-        $room = (isset($room))? $value :'';
+        $rooms = (isset($value))? $value :'';
         
         
+        $hotels = json_encode($this->get_hotels->get_hotels_list($place, $checkin,$checkout));
+        //$hotels = str_replace("}", "]", str_replace("{", "[", $hotels));
+        //echo $hotels; exit;
+        //print_r($hotels);
+        //exit;
+         $name = $this->get('continent');
         // If the id parameter doesn't exist return all the users
 
         if ($name === NULL)
@@ -77,45 +83,47 @@ class Hotel extends REST_Controller {
 
         
         // Validate the id.
-        if ($name <= "")
-        {
+        // if ($name <= "")
+        // {
             
-            // Invalid id, set the response and exit.
-            $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
-        }
+        //     // Invalid id, set the response and exit.
+        //     $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+        // }
 
-        // Get the user from the array, using the id as key for retrieval.
-        // Usually a model is to be used for this.
+        // // Get the user from the array, using the id as key for retrieval.
+        // // Usually a model is to be used for this.
 
-        $user = NULL;
+        // $user = NULL;
 
-        if (!empty($hotels))
-        {
+        // if (!empty($hotels))
+        // {
             
-            if (!empty($hotels))
-            {
-                foreach ($hotels as $key => $value)
-                {
-                    if (strcasecmp( $value['name'] , $name) == 0 )
-                    {       
-                    $user = $value;
-                    }
-                }
-            }
+        //     if (!empty($hotels))
+        //     {
+        //         foreach ($hotels as $key => $value)
+        //         {
+        //             if (strcasecmp( $value['name'] , $name) == 0 )
+        //             {       
+        //             $user = $value;
+        //             }
+        //         }
+        //     }
              
-        }
+        // }
 
-        if (!empty($user))
-        {
-            $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-        }
-        else
-        {
-            $this->set_response([
-                'status' => FALSE,
-                'message' => 'User could not be found'
-            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
-        }
+        // if (!empty($user))
+        // {
+        //     $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        // }
+        // else
+        // {
+        //     $this->set_response([
+        //         'status' => FALSE,
+        //         'message' => 'User could not be found'
+        //     ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        // }
+
+        // exit; 
     }
 
     public function users_get()
