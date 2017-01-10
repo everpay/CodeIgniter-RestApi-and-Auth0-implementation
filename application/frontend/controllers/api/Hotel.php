@@ -51,12 +51,11 @@ class Hotel extends REST_Controller {
         $value = $this->uri->segment('7');
         $rooms = (isset($value))? $value :'';
         
-        
-        $hotels = json_encode($this->get_hotels->get_hotels_list($place, $checkin,$checkout));
+        $result= $this->get_hotels->get_hotels_list($place, $checkin,$checkout);
+        $hotels = json_encode($result);
         //$hotels = str_replace("}", "]", str_replace("{", "[", $hotels));
         //echo $hotels; exit;
-        //print_r($hotels);
-        //exit;
+        
          $name = $this->get('continent');
         // If the id parameter doesn't exist return all the users
 

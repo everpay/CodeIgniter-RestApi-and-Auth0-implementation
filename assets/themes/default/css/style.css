@@ -842,7 +842,12 @@ ol li{}
     padding:20px 0 15px;
 	margin-bottom:40px;
 }
+.search-section label{
+	color:#fff;
+	font-size:14px;
+	font-weight:lighter;
 
+}
 /* main-wrap */
 #main-wrap{
 	margin-bottom:50px;
@@ -910,7 +915,7 @@ ol li{}
 .hoteldetail-wrap > .row > .col-sm-3 .star{
 	font-size:13px;
 	margin-bottom:10px;
-    text-align:right;
+    text-align:left;
     text-transform:uppercase;
 }
 .listing .star i,

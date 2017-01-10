@@ -9,10 +9,7 @@ class Home extends CI_Controller {
 
 		$this->load->helper('url');
         //$this->load->helper(array('url', 'html'));
-        $this->load->library('session');
-		$this->load->helper('security');
-      	$this->load->library('tank_auth');
-		$this->lang->load('tank_auth');
+        $this->load->model('get_hotels');
 		
 		$this->_init();
 	}
@@ -25,8 +22,8 @@ class Home extends CI_Controller {
 		$this->load->css('assets/themes/default/css/bootstrap.css');
         $this->load->css('assets/themes/default/css/bootstrap-social.css');
         $this->load->css('assets/themes/default/css/font-awesome.css');
- 		
-    
+		$this->load->css('assets/themes/default/css/jquery.typeahead.css');
+		    
         // Javascript
         //$this->load->js('https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js');
 		$this->load->js('assets/themes/default/js/jquery.js');
@@ -48,11 +45,24 @@ class Home extends CI_Controller {
 		// 	$this->load->view('Home', $data);
 		// }
 		// Get login for counting attempts to login
-		
-		$this->load->view('Home');
+		$data['result'] = $this->get_hotels->get_locations();
+
+		// echo "<pre>";
+		// print_r($data['result']['name']);
+		// print_r($data['result']['city_hotel']);
+		// exit;
+		$this->load->view('Home',$data);
     }
 	public function login_form(){
 		$this->load->view('auth/login_form');
+	}
+	public function get_locations()
+	{
+		$data['result'] = $this->get_hotels->get_locations();
+
+		json_encode($data);
+		print_r(json_encode($data));
+		
 	}
    
 }

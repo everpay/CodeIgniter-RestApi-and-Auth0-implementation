@@ -1,28 +1,52 @@
 <!-- Search Section -->
 <div class="search-section">
 	<div class="container">
-    	<form method="get" action="">
+    	<form action="<?php echo base_url(); ?>Hotel/get_hotel_list" method="post">
             <div class="row">
                 <div class="col-sm-3">
-                	<input placeholder="Canada" name="location" type="text">
+                    <div class="typeahead__container">
+                    <label>Where would you like to go?</label>
+                    <div class="typeahead__field">
+                        <span class="typeahead__query">
+                        <input class="js-typeahead-country_v2" name="country_v2[query]" type="search"  autocomplete="off" value="<?php if(isset($place)){echo $place;}else {echo '';} ?>">
+                        </span>
+                    </div>
+                </div>
                 </div>
                 <div class="col-sm-2">
-                	<input id="datepicker-8" placeholder="11/18/2016" name="Check-in" type="text">
+                    <label>Check-in:</label>
+                	<input id="datepicker-8" value="<?php echo $check_in; ?>" name="Check-in" type="text">
                 </div>
                 <div class="col-sm-2">
-                	<input id="datepicker-9" placeholder="01/07/2017" name="Check-out" type="text">
+                    <label>Check-out:</label>
+                	<input id="datepicker-9" value="<?php echo $check_out; ?>" name="Check-out" type="text">
                 </div>
-                <div class="col-sm-3">
-                	<select name="travelers">
-                        <option>Adults</option>
-                        <option selected="">2+1 with Bedroom + 2 Child</option>
-                        <option>1+1 with Bedroom + 1 Child</option>
-                        <option>2+1 with Bedroom + Full</option>
-                        <option>Full Services 15 Days</option>
+                <div class="col-sm-1">
+                    <label>Rooms:</label>
+                	<select name="no_rooms" id="no_rooms">
+                        <option value="1" selected="selected">1</option>
+                        <?php for($x = 2; $x <= 15; $x++){ echo '<option value="'.$x.'">'.$x.'</option>';} ?>
                     </select>
                 </div>
+                <div class="col-sm-1">
+                    <label>Adults:</label>
+                	<select name="no_adults" id="no_adults">
+                        <option value="1" selected="selected">1</option>
+                        <?php for($x = 2; $x <= 15; $x++){ echo '<option value="'.$x.'">'.$x.'</option>';} ?>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                	<label>Childrens:</label>
+                    <select name="no_children" id="no_children">
+                        <option value="1" selected="selected">1</option>
+                        <?php for($x = 2; $x <= 15; $x++){ echo '<option value="'.$x.'">'.$x.'</option>';} ?>
+                    </select>
+                </div>
+                  
+
                 <div class="col-sm-2">
-                	<input class="button" value="search" type="button">
+                    <label></label>
+                	<input class="button" value="search" type="submit">
                 </div>
             </div>
         </form>
@@ -189,117 +213,10 @@
                     </aside>
                 </div>
                 <div class="col-sm-9">
-                    <div class="hotels-listing">
-                        <h2>Canada: 1050 properties. Showing 1-5</h2>
-                        <div class="listing">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="image-wrap">
-                                        <a href="#"><img src="images/can-img1.jpg" alt="" ></a>
-                                        <div class="discount-tag">
-                                        	<span>20% <em>discount</em></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h3><a href="#">Sandman Signature Toronto Airport Hotel</a></h3>
-                                    <span>( Toronto, Canada <a href="#"><i class="fa fa-map-marker" aria-hidden="true"> Map</i></a> )</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="#">read more...</a></p>
-                                </div>
-                                <div class="col-sm-2">
-                                	<a href="#" class="review">( 50 Reviews )</a>
-                                    <p class="star"><i class="fa fa-star" aria-hidden="true"></i> 4 Star Hotel</p>
-                                    <div class="rate">
-                                    	<span class="old-rate"><em>Old Price</em><strike>PKR 44,280</strike></span>
-                                        <span class="new-rate"><em>New Price</em>PKR 20,000</span>
-                                        <h6>Nightly rates as low as*</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="listing">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="image-wrap">
-                                        <a href="#"><img src="images/can-img2.jpg" alt="" ></a>
-                                        <!--<div class="discount-tag">
-                                        	<span>20% <em>discount</em></span>
-                                        </div>-->
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h3><a href="#">Sandman Signature Toronto Airport Hotel</a></h3>
-                                    <span>( Toronto, Canada <a href="#"><i class="fa fa-map-marker" aria-hidden="true"> Map</i></a> )</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="#">read more...</a></p>
-                                </div>
-                                <div class="col-sm-2">
-                                	<a href="#" class="review">( 50 Reviews )</a>
-                                    <p class="star"><i class="fa fa-star" aria-hidden="true"></i> 4 Star Hotel</p>
-                                    <div class="rate">
-                                    	<!--<span class="old-rate"><em>Old Price</em><strike>PKR 44,280</strike></span>-->
-                                        <span class="new-rate"><em>New Price</em>PKR 20,000</span>
-                                        <h6>Nightly rates as low as*</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="listing">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="image-wrap">
-                                        <a href="#"><img src="images/can-img3.jpg" alt="" ></a>
-                                        <div class="discount-tag">
-                                        	<span>10% <em>discount</em></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h3><a href="#">Sandman Signature Toronto Airport Hotel</a></h3>
-                                    <span>( Toronto, Canada <a href="#"><i class="fa fa-map-marker" aria-hidden="true"> Map</i></a> )</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="#">read more...</a></p>
-                                </div>
-                                <div class="col-sm-2">
-                                	<a href="#" class="review">( 50 Reviews )</a>
-                                    <p class="star"><i class="fa fa-star" aria-hidden="true"></i> 4 Star Hotel</p>
-                                    <div class="rate">
-                                    	<span class="old-rate"><em>Old Price</em><strike>PKR 44,280</strike></span>
-                                        <span class="new-rate"><em>New Price</em>PKR 20,000</span>
-                                        <h6>Nightly rates as low as*</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="listing">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="image-wrap">
-                                        <a href="#"><img src="images/can-img4.jpg" alt="" ></a>
-                                        <!--<div class="discount-tag">
-                                        	<span>20% <em>discount</em></span>
-                                        </div>-->
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h3><a href="#">Sandman Signature Toronto Airport Hotel</a></h3>
-                                    <span>( Toronto, Canada <a href="#"><i class="fa fa-map-marker" aria-hidden="true"> Map</i></a> )</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="#">read more...</a></p>
-                                </div>
-                                <div class="col-sm-2">
-                                	<a href="#" class="review">( 50 Reviews )</a>
-                                    <p class="star"><i class="fa fa-star" aria-hidden="true"></i> 4 Star Hotel</p>
-                                    <div class="rate">
-                                    	<!--<span class="old-rate"><em>Old Price</em><strike>PKR 44,280</strike></span>-->
-                                        <span class="new-rate"><em>New Price</em>PKR 20,000</span>
-                                        <h6>Nightly rates as low as*</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="listing">
+                    <div class="hotels-listing" id="hotels-listing"> 
+                        <!--<h2>XXXX: XXX properties. Showing XXX</h2>-->
+                                              
+                        <!--<div class="listing">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="image-wrap">
@@ -324,7 +241,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
+                        
                     </div>
                     
                     <!-- Pagnination -->
@@ -368,6 +286,7 @@
 </div>
 <!--main end -->
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/themes/default/js/jquery.typeahead.min.js"></script>
 <script>
 jQuery.noConflict();
 </script>
@@ -381,20 +300,32 @@ function showHotels() {
     var str = "<?php echo $check_out; ?>";
     if(str!=""){var check_out = str.replace("/", "-")}else{ var check_out = "NULL";}
     var rooms = "<?php echo $no_rooms; ?>";
-    console.log(rooms);
+    //console.log('<?php echo $place; ?>');
     jQuery.ajax({
         url : "<?php echo site_url(); ?>/api/hotel/hotels/"+"<?php echo $place; ?>"+"/"+check_in+"/"+check_out+"/"+rooms,
         type : "GET",
         success: function(response){
-            console.log(response);
-            return false;
-           jQuery.each(response,function(index){
-                // jQuery('#results').append(response[index].email);
-                // console.log(response[index].fields.name);
-        });
-
-        console.log(response);
-        console.log("success");
+            
+            //var news = document.getElementsByClassName("hotelsListing")[0];
+            //var items = response.items;
+            var e = jQuery('<div />', { id: "itemsdiv" }).appendTo('#step-1 .col-md-12'),
+            r = jQuery.parseJSON(response),
+            i = 0;
+            
+            jQuery.each(r, function(key, val){
+                var minrate = "";
+                var maxrate = "";
+                if(val.maxrate!="null"){maxrate = val.maxrate; }
+                if(val.minrate!="null"){minrate = val.minrate;}
+                jQuery('#hotels-listing').append('<div class="listing"><div class="row"><div class="col-sm-3"><div class="image-wrap"><a href="'+val.photo_url+'"><img src="'+val.photo_url+'" alt="'+val.name+'" ></a></div></div>'+
+                '<div class="col-sm-6"><h3><a href="'+val.hotel_url+'">'+val.name+'</a></h3><p>'+val.desc_en+'<a href="#">read more...</a></p></div><div class="col-sm-3">'+
+                '<a href="#" class="review">( '+val.review_score+' Reviews )</a><p class="star"><i class="fa fa-star" aria-hidden="true"></i> '+val.class+' Star Hotel</p>'+
+                '<span class="old-rate"><em>Min Price: </em><strike>$'+minrate+'</strike></span><br /><span class="new-rate"><em>Max Price: </em>$'+maxrate+' </span></div></div>');
+                
+              });
+           
+        //console.log(response);
+        //console.log("success");
 
     },
     error : function(xhr,errmsg,err) {
@@ -407,4 +338,58 @@ function showHotels() {
 
 }
 
+
+var data = {
+        hotel: <?php echo json_encode($result["name"]); ?>,
+        city: <?php echo json_encode($result["city_hotel"]); ?>
+    };
+        
+jQuery.typeahead({
+    input: '.js-typeahead-country_v2',
+    minLength: 1,
+    maxItem: 10,
+    order: "asc",
+    template: "{{display}} <small style='color:#999;'>{{group}}</small>",
+    source: {
+        hotel: {
+           data: data.hotel
+        },
+        city: {
+           data: data.city
+        }
+
+    },
+    callback: {
+        onNavigateAfter: function (node, lis, a, item, query, event) {
+            if (~[38,40].indexOf(event.keyCode)) {
+                var resultList = node.closest("form").find("ul.typeahead__list"),
+                    activeLi = lis.filter("li.active"),
+                    offsetTop = activeLi[0] && activeLi[0].offsetTop - (resultList.height() / 2) || 0;
+ 
+                resultList.scrollTop(offsetTop);
+            }
+ 
+        },
+        onResult: function (node, query, result, resultCount) {
+           
+            if (query === "") return;
+ 
+            var text = "";
+            if (result.length > 0 && result.length < resultCount) {
+                text = "Showing <strong>" + result.length + "</strong> of <strong>" + resultCount + '</strong> elements matching "' + query + '"';
+            } else if (result.length > 0) {
+                text = 'Showing <strong>' + result.length + '</strong> elements matching "' + query + '"';
+            } else {
+                text = 'No results matching "' + query + '"';
+            }
+            jQuery('#result-container').html(text);
+ 
+        },
+        onMouseLeave: function (node, a, item, event) {
+ 
+           jQuery(a).find('.flag-chart').remove();
+ 
+        }
+    }
+});
 </script>
